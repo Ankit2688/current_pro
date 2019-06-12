@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>second convertor</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body{
+	background-image: url("http://getwallpapers.com/wallpaper/full/f/0/7/74834.jpg");
+    background-color: #b2afab;
+    background-position: 72%;
+    background-size: cover;
+    min-height: 100vh;
+    max-height: 999px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+ }
+label{
+	float:left;
+}
+.f-l{
+	float:left;
+
+}
+.w-5{
+	width:50%!important;
+}
+.c-6{
+    background-color: white;
+    padding: 5px 10px 0px 30px;
+    border-radius: 5px;
+}
+</style>  
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<body>
+<center>
+	<div class="container" ng-app = "myApp" ng-controller = "wishCtrl">
+	<span><h2 style="color:white;">{{WelcomeMessage}}</h2></span>		
+		<div class="container">		
+			<form name="myForm">					
+					<div class="form-group">
+					  <label for="fndNum" style = "display: flex;" >Enter the Value(in seconds):</label> 
+						<input type = "tel"  id = "inputField" class = "form-control" autofocus name="fndNum" ng-pattern = "/^\d{10}$/" ng-model = "fndNum" required>
+					</div>				
+			</form>								  	
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default"  style = "float:left;" ng-click = "convert()">Convert</button>
+			</div>
+		</div>	
+		<div class=" col-sm-12 container" ng-show = "displayData">
+			<div class="col-sm-6 c-6">
+			<div class="row">
+				<div class="w-5 f-l"><label>Weeks</label></div><div class="w-5 f-l"><p ng-bind = "weeks"></p></div>
+			</div>
+			<div class="row">
+				<div class="w-5 f-l"><label>Days</label></div><div class="w-5 f-l"><p ng-bind = "days"></p></div>
+			</div>
+			<div class="row">
+				<div class="w-5 f-l"><label>Hours</label></div><div class="w-5 f-l"><p ng-bind = "hours"></p></div>
+			</div>
+			<div class="row">
+				<div class="w-5 f-l"><label>Minutes</label></div><div class="w-5 f-l"><p ng-bind = "minutes"></p></div>
+			</div>
+			<div class="row">
+				<div class="w-5 f-l"><label>Seconds</label></div><div class="w-5 f-l"><p ng-bind = "seconds"></p></div>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</center>
+<script>
+	var app = angular.module("myApp",[]);
+		app.controller("wishCtrl", function($scope, $http){	
+		$scope.WelcomeMessage = "Seconds Convertor";
+		$scope.displayData = false;
+		
+		$scope.convert = function(){
+		
+			var d = $('#inputField').val();
+			$scope.weeks = Math.floor(d / (3600*24*7));
+			$scope.days = Math.floor(d %(3600*24*7) / (3600*24));
+			$scope.hours = Math.floor(d %(3600*24*7) %(3600*24)/ 3600);
+			$scope.minutes = Math.floor(d %(3600*24*7) % (3600*24) % 3600 / 60);
+			$scope.seconds = Math.floor(d %(3600*24*7) % (3600*24) % 3600 % 60);
+			if($('#inputField').val().length > 0){
+				$scope.displayData = true;
+			}
+			document.getElementById("inputField").value ='';				
+			document.getElementById("inputField").focus();
+			
+		}
+
+			
+	});
+</script>	
+</body>
+</html>
+
+
