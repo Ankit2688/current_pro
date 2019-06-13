@@ -91,26 +91,28 @@ label{
 			var timeArray =[];
 			timeArray.push({time:"w1",value:w},{time:"d1",value:d},{time:"h1",value:h},{time:"m1",value:m});
 			var result = "";
+			var data = "";
 				for(var i=0; i< timeArray.length;i++){
 					if(timeArray[i].value > 0)
 					{
 						if(timeArray[i].time == "w1"){
-							var weekData = timeArray[i].value == 1 ? " Week, " : " Weeks, "
-							result +=timeArray[i].value+weekData;
+							data = timeArray[i].value == 1 ? " Week, " : " Weeks, "
+							result +=timeArray[i].value+data;
 						}
 						else if(timeArray[i].time == "d1"){
-							var dayData = timeArray[i].value == 1 ? " Day, " : " Days, "
-							result +=timeArray[i].value+dayData;
+							data = timeArray[i].value == 1 ? " Day, " : " Days, "
+							result +=timeArray[i].value+data;
 						}
 						else if(timeArray[i].time == "h1"){
-							var hourData = timeArray[i].value == 1 ? " Hour, " : " Hours, "
-							result += timeArray[i].value+hourData;
+							data = timeArray[i].value == 1 ? " Hour, " : " Hours, "
+							result += timeArray[i].value+data;
 						}
 						else if(timeArray[i].time == "m1"){
-							var minData = timeArray[i].value == 1 ? " Min" : " Mins"
-							result +=timeArray[i].value+minData;
+							data = timeArray[i].value == 1 ? " Min" : " Mins"
+							result +=timeArray[i].value+data;
 						}
 					}
+					data ="";
 				}
 			var updatedResult = result.slice(-2);
 				if(updatedResult ==', '){
@@ -125,7 +127,7 @@ label{
 			var minute	=	m > 0 ? m + (m == 1 ? " Min, " : " Mins ") 		: "";
 						
 			$scope.weeks 	= w;
-			$scope.days	= d;
+			$scope.days	 	= d;
 			$scope.hours 	= h;
 			$scope.minutes	= m;
 
