@@ -25,7 +25,6 @@ label{
 }
 .f-l{
 	float:left;
-
 }
 .w-5{
 	width:50%!important;
@@ -69,7 +68,7 @@ label{
 				<div class="w-5 f-l"><label>Minutes</label></div><div class="w-5 f-l"><p ng-bind = "minutes"></p></div>
 			</div>
 			<div class="row">
-				<div class="w-5 f-l"><label>Seconds</label></div><div class="w-5 f-l"><p ng-bind = "seconds"></p></div>
+				<div class="w-5 f-l"><label>Total Time : </label></div><div class="w-5 f-l"><p id = "upTime"></p></div>
 			</div>
 			</div>
 			
@@ -84,12 +83,52 @@ label{
 		
 		$scope.convert = function(){
 		
-			var d = $('#inputField').val();
-			$scope.weeks = Math.floor(d / (3600*24*7));
-			$scope.days = Math.floor(d %(3600*24*7) / (3600*24));
-			$scope.hours = Math.floor(d %(3600*24*7) %(3600*24)/ 3600);
-			$scope.minutes = Math.floor(d %(3600*24*7) % (3600*24) % 3600 / 60);
-			$scope.seconds = Math.floor(d %(3600*24*7) % (3600*24) % 3600 % 60);
+			var d1 = $('#inputField').val();
+			var w = Math.floor(d1 / (3600*24*7));
+			var d= Math.floor(d1 %(3600*24*7) / (3600*24));
+			var h = Math.floor(d1 %(3600*24*7) %(3600*24)/ 3600);
+			var m = Math.floor(d1 %(3600*24*7) % (3600*24) % 3600 / 60);
+			var timeArray =[];
+			timeArray.push({time:"w1",value:w},{time:"d1",value:d},{time:"h1",value:h},{time:"m1",value:m});
+			var result = "";
+				for(var i=0; i< timeArray.length;i++){
+					if(timeArray[i].value > 0)
+					{
+						if(timeArray[i].time == "w1"){
+							var weekData = timeArray[i].value == 1 ? " Week, " : " Weeks, "
+							result +=timeArray[i].value+weekData;
+						}
+						else if(timeArray[i].time == "d1"){
+							var dayData = timeArray[i].value == 1 ? " Day, " : " Days, "
+							result +=timeArray[i].value+dayData;
+						}
+						else if(timeArray[i].time == "h1"){
+							var hourData = timeArray[i].value == 1 ? " Hour, " : " Hours, "
+							result += timeArray[i].value+hourData;
+						}
+						else if(timeArray[i].time == "m1"){
+							var minData = timeArray[i].value == 1 ? " Min" : " Mins"
+							result +=timeArray[i].value+minData;
+						}
+					}
+				}
+			var updatedResult = result.slice(-2);
+				if(updatedResult ==', '){
+					result =result.slice(0,-2);
+				}
+
+			$("#upTime").html(result);
+			
+			var week 	= 	w > 0 ? w + (w == 1 ? " Week, " : " Weeks, ")	: "";
+			var day		= 	d > 0 ? d + (d == 1 ? " Day, " : " Days, ") 	: "";
+			var hour	=	h > 0 ? h + (h == 1 ? " Hour, " : " Hours, ")	: "";
+			var minute	=	m > 0 ? m + (m == 1 ? " Min, " : " Mins ") 		: "";
+						
+			$scope.weeks 	= w;
+			$scope.days	= d;
+			$scope.hours 	= h;
+			$scope.minutes	= m;
+
 			if($('#inputField').val().length > 0){
 				$scope.displayData = true;
 			}
@@ -97,15 +136,10 @@ label{
 			document.getElementById("inputField").focus();
 			
 		}
-/* 	var ut_weeks = 	w > 0 ? w + (w == 1 ? " Week, " : " Weeks, ")	: "";
-	var ut_days	 = 	d > 0 ? d + (d == 1 ? " Day, " : " Days, ") 	: "";;
-	var ut_hrs	 =	h > 0 ? h + (h == 1 ? " Hour, " : " Hours, ")	: "";;
-	var ut_mins	 =	m > 0 ? m + (m == 1 ? " Min, " : " Mins, ") 	: "";;
-	var ut_secs	 = 	s > 0 ? s + (s == 1 ? " Sec " : " Secs ") 	: ""; ;
-*/			
+
+			
 	});
 </script>	
 </body>
 </html>
-
 
