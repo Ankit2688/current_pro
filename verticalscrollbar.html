@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+
+
+
+
+
+.scrollbar
+{
+    margin-left: 30px;
+    float: left;
+    height: 300px;
+    width: 576px;
+    background: #F5F5F5;
+    overflow-y: scroll;
+    /* max-height: 150px; */
+    margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
+#style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 15px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 15px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: black;
+}
+
+
+</style>
+</head>     
+
+<body>
+
+    <div class="scrollbar" id="style-2">
+      <div class="force-overflow">
+        
+      <h6>// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :)// Play around with some webkit scroll bars... nothing special, but its interesting to see what can be done :) </h6> 
+        
+      </div>
+    </div>
+
+<script>
+$(function(){
+	$('.select-items div').addClass('divData');
+	var count = 0 ;
+	$('#drop').on('click',function(){
+		if(count ==1){
+			$('.select-items').css('display','none');
+			count=0;
+		}	
+		else{
+			$('.select-items').css('display','block');
+			count = 1;
+		}
+	});
+	$('.divData').on('click',function(){
+		count=0;
+		var data =$(this).text();
+		$('.select-items').css('display','none');
+		$('.select-selected').text(data);
+		$('#currentSelect').val(data);
+		console.log(data);
+	});
+});
+</script>
+
+</body>
+</html>
