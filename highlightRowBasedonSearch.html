@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(function() {
+
+	var search = $('.beer-search'),
+		content = $('.beer-list'),
+		matches = $(), index = 0;
+
+	// Listen for the text input event
+	search.on('input', function(e) {
+
+		// Only search for strings 2 characters or more
+		if (search.val().length >= 2) {
+			
+            
+            
+			// Use the highlight plugin
+			content.highlight(search.val(), function(found) {                
+                found.parent().parent().css('background','yellow');
+			});
+		}
+		else {
+			content.highlightRestore();
+		}
+
+	});
+	
+});
+
+(function($) {
+
+	var termPattern;
+
+	$.fn.highlight = function(term, callback) {
+
+		return this.each(function() {
+
+			var elem = $(this);
+
+			if (!elem.data('highlight-original')) {
+				
+				// Save the original element content
+				elem.data('highlight-original', elem.html());
+				
+			} else {
+				
+				// restore the original content
+				elem.highlightRestore();
+				
+			}
+
+			termPattern = new RegExp('(' + term + ')', 'ig');
+
+			// Search the element's contents
+			walk(elem);
+
+			// Trigger the callback
+			callback && callback(elem.find('.match'));
+
+		});
+	};
+
+	$.fn.highlightRestore = function() {
+		
+		return this.each(function() {
+			var elem = $(this);
+			elem.html(elem.data('highlight-original'));
+		});
+		
+	};
+
+	function walk(elem) {
+
+		elem.contents().each(function() {
+
+			if (this.nodeType == 3) { // text node
+
+				if (termPattern.test(this.nodeValue)) {
+					$(this).replaceWith(this.nodeValue.replace(termPattern, '<span class="match">$1</span>'));
+				}
+			} else {
+				walk($(this));
+			}
+		});
+	}
+
+})(jQuery); 
+</script>
+<style>
+span.match{
+ 	background-color:#f8dda9;
+ 	border:1px solid #edd19b;
+ 	margin:-1px;
+	color:#390705;
+}
+</style>
+
+</head>
+<body>
+<input type="text" class="beer-search" placeholder="Find a beer" />
+		<div class="beer-list">
+        	<table class="active" id="tap" cellpadding="0" cellspacing="0" width="100%">
+            	<tr>
+                	<th width="55%">Beer Name</th>
+                    <th width="15%">ABV</th>
+                    <th width="15%">Served In</th>
+                    <th width="15%">Price</th>
+                </tr>
+                <tr><td>4 Hands Divided Sky Rye IPA</td><td>6.5</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Abita Strawberry Harvest Lager</td><td>4.2</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Ale Asylum Bedlam</td><td>7.5</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Allagash Saison</td><td>6.1</td><td>16oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Allagash White</td><td>5</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Angry Orchard Crisp Apple</td><td>5</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Bell's Two Hearted Ale</td><td>7</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Boulevard 80 Acre Hoppy Wheat</td><td>5.5</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Boulevard Grainstorm Black Rye IPA</td><td>7.7</td><td>12oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Boulevard Tank 7</td><td>8.5</td><td>12oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Brooklyn Lager</td><td>5.2</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Buckledown Belt & Suspenders American IPA</td><td>7</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Dark Horse Double Crooked Tree IPA</td><td>12</td><td>12oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Dark Horse Fore Smoked Stout</td><td>8</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Deschutes Black Butte Porter</td><td>5.2</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Deschutes Fresh Squeezed IPA</td><td>6.4</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Firestone Walker Union Jack IPA</td><td>7.5</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Goose Island 312 Urban Wheat Ale</td><td>4.2</td><td>16oz. Draft</td><td>$4.00 </td></tr>
+                <tr><td>Goose Island Green Line Pale Ale</td><td>5</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Jolly Pumpkin Oro De Calabaza</td><td>8</td><td>12oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Krombacher Pils</td><td>4.8</td><td>16oz. Draft</td><td>$5.75 </td></tr>
+                <tr><td>Kwak</td><td>8</td><td>16oz. Draft</td><td>$9.25 </td></tr>
+                <tr><td>Lagunitas A Little Sumpin Sumpin Ale</td><td>7.5</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Lagunitas Undercover Investigation Shut Down</td><td>9.75</td><td>16oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Left Hand Nitro Milk Sout</td><td>6</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Local Option Morning Wood Oak Aged Coffee Amber Ale</td><td>7.1</td><td>12oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Miller Lite</td><td>4.2</td><td>16oz. Draft</td><td>$4.25 </td></tr>
+                <tr><td>Morland Old Speckled Hen</td><td>5.2</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>New Holland Cabin Fever</td><td>6</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>New Holland Dragon's Milk Barrel Aged</td><td>8.5</td><td>10oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Revolution Anti-Hero IPA</td><td>6</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Revolution Cross Of Gold</td><td>5</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Stella Artois</td><td>5</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Stone Go To IPA</td><td>4.5</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>The Bruery Saison de Lente</td><td>6.5</td><td>12oz. Draft</td><td>$7.00 </td></tr>
+                <tr><td>Three Floyds Gumballhead</td><td>5.5</td><td>16oz. Draft</td><td>$6.25 </td></tr>
+                <tr><td>Two Brothers Monarch White Beer</td><td>4.5</td><td>16oz. Draft</td><td>$6.00 </td></tr>
+                <tr><td>Weihenstephaner Hefe Weissbier</td><td>5.4</td><td>16oz. Draft</td><td>$6.50 </td></tr>
+            </table>
+
+</body>
+</html>
