@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input { width: 50px;height: 18px; margin: 5px;  border-radius:5px;border: 1px solid grey;}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+$('.inputs').eq(0).focus();
+
+	
+	$('.inputs').keypress(function(e){
+		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
+			$("#errmsg").html("Digits Only Allowed !!!").show().fadeOut(2000);
+			return false;
+		}
+	
+	});
+	$(".inputs").keyup(function(e){
+    	if(this.value.length == this.maxLength){
+        	$(this).next('.inputs').focus();
+        }
+    });
+	
+
+});
+</script>
+</head>
+<body>
+
+<input class="inputs" type="text" pattern = "/^\d+$/" maxlength="4" />
+<input class="inputs" type="text" maxlength="4" />
+<input class="inputs" type="text" maxlength="4" />
+<input class="inputs" type="text" maxlength="4" /><br><br>
+<span id="errmsg" style = "font-weight:bold;color:red;"></span>
+
+</body>
+</html>
