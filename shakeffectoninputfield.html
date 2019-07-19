@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input { width: 50px;height: 18px; margin: 5px;  border-radius:5px;border: 1px solid grey;}
+.shake {
+  animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  display: inline-block;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+$('.inputs').eq(0).focus();
+	
+	$('.inputs').keypress(function(e){
+		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
+			$(this).addClass("animated shake");
+			 setTimeout(function() {
+				   $('.inputs').removeClass("animated shake");
+			   },1000);
+			$("#errmsg").html("Digits Only Allowed !!!").show();
+			$("#errmsg").css('display','inline-block');
+			//$("#errmsg").addClass("animated shake").fadeOut(2000);
+			return false;
+		}
+
+	
+	});
+	$(".inputs").keyup(function(e){
+    	if(this.value.length == this.maxLength){
+        	$(this).next('.inputs').focus();
+        }
+    });
+	
+});
+</script>
+</head>
+<body>
+<table>
+<tr>
+<th><input class="inputs" type="text" pattern = "/^\d+$/" maxlength="4" />
+<input class="inputs" type="text" maxlength="4" />
+<input class="inputs" type="text" maxlength="4" />
+<input class="inputs" type="text" maxlength="4" /></th><br><br>
+</tr>
+<span id="errmsg" style = "font-weight:bold;color:red;"></span>
+
+</body>
+</html>
