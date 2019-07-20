@@ -3,6 +3,9 @@
 <head>
 <style>
 input { width: 50px;height: 18px; margin: 5px;  border-radius:5px;border: 1px solid grey;}
+.times { width: 26px;height: 18px; margin: 5px;  border-radius:5px;border: 1px solid grey;padding: 0px 0px 0px 7px;
+}
+
 .shake {
   animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both infinite;
   transform: translate3d(0, 0, 0);
@@ -34,6 +37,8 @@ input { width: 50px;height: 18px; margin: 5px;  border-radius:5px;border: 1px so
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+
+//card entry
 $('.inputs').eq(0).focus();
 	
 	$('.inputs').keypress(function(e){
@@ -42,32 +47,102 @@ $('.inputs').eq(0).focus();
 			 setTimeout(function() {
 				   $('.inputs').removeClass("animated shake");
 			   },1000);
-			$("#errmsg").html("Digits Only Allowed !!!").show();
+			$("#errmsg").html("Only Digits Allowed !!!").show().fadeOut(2000);
 			$("#errmsg").css('display','inline-block');
-			//$("#errmsg").addClass("animated shake").fadeOut(2000);
 			return false;
-		}
-
-	
+		}	
 	});
 	$(".inputs").keyup(function(e){
     	if(this.value.length == this.maxLength){
         	$(this).next('.inputs').focus();
         }
-    });
+    });	
 	
+//clock entry	
+	$('.times').keypress(function(e){
+		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
+			$(this).addClass("animated shake");
+			 setTimeout(function() {
+				   $('.times').removeClass("animated shake");
+			   },300);
+			$("#errmsg1").html("Only Digits Allowed !!!").show().fadeOut(1000);
+			$("#errmsg1").css('display','inline-block');
+			return false;
+		}	
+	});
+	var i = 0;
+	$(".times").keyup(function(){
+		
+		if(($(this).val() < 24) && ($('.times').index(this) == 0)){
+				if(this.value.length == this.maxLength){
+					$(this).next('.times').focus();
+				}
+		}
+		else if(($(this).val() > 23) && ($('.times').index(this) == 0)){
+				i = $('.times').index(this) ; 
+				$(this).addClass("animated shake");
+				 setTimeout(function() {
+						   $('.times').removeClass("animated shake");
+					   },300);	
+				$("#errmsg1").html("Enter Value less than 24 !!!").show().fadeOut(1000);
+				$('.times').eq(i).val("");$('.times').eq(this).focus();
+				
+
+	
+		}
+		else if(($(this).val() < 61) && ($('.times').index(this) == 1 || 2 )){
+				if(this.value.length == this.maxLength){
+					$(this).next('.times').focus();
+				}
+		}		
+		else if(($(this).val() > 60) && ($('.times').index(this) == 1 || 2)){
+				i = $('.times').index(this);
+				$(this).addClass("animated shake");
+				 setTimeout(function() {
+						   $('.times').removeClass("animated shake");
+					   },300);
+				$("#errmsg1").html("Enter Value less than 61 !!!").show().fadeOut(1000);
+				$('.times').eq(i).val("");$('.times').eq(this).focus();
+				
+
+
+		}
+    });
 });
 </script>
 </head>
 <body>
+<h3>Card Entry</h3>
 <table>
-<tr>
-<th><input class="inputs" type="text" pattern = "/^\d+$/" maxlength="4" />
-<input class="inputs" type="text" maxlength="4" />
-<input class="inputs" type="text" maxlength="4" />
-<input class="inputs" type="text" maxlength="4" /></th><br><br>
-</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>
+			<input class="inputs" type="text" maxlength="4" />
+			-<input class="inputs" type="text" maxlength="4" />
+			-<input class="inputs" type="text" maxlength="4" />
+			-<input class="inputs" type="text" maxlength="4" />
+		</th>
+	</tr>
+</table>
+<br><br>
 <span id="errmsg" style = "font-weight:bold;color:red;"></span>
+
+
+<h3>Clock Entry</h3>
+<table>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>
+			<input class="times" type="text" placeholder= "hh" maxlength="2" />
+			:<input class="times" type="text" placeholder= "mm" maxlength="2" />
+			:<input class="times" type="text" placeholder= "ss"  maxlength="2" />
+		</th>
+	</tr>
+</table>
+<br><br>
+<span id="errmsg1" style = "font-weight:bold;color:red;"></span>
 
 </body>
 </html>
