@@ -44,9 +44,7 @@ $('.inputs').eq(0).focus();
 	$('.inputs').keypress(function(e){
 		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
 			$(this).addClass("animated shake");
-			 setTimeout(function() {
-				   $('.inputs').removeClass("animated shake");
-			   },1000);
+			 removeShaking($('.inputs'));
 			$("#errmsg").html("Only Digits Allowed !!!").show().fadeOut(2000);
 			$("#errmsg").css('display','inline-block');
 			return false;
@@ -62,9 +60,7 @@ $('.inputs').eq(0).focus();
 	$('.times').keypress(function(e){
 		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
 			$(this).addClass("animated shake");
-			 setTimeout(function() {
-				   $('.times').removeClass("animated shake");
-			   },300);
+			 removeShaking($('.inputs'));
 			$("#errmsg1").html("Only Digits Allowed !!!").show().fadeOut(1000);
 			$("#errmsg1").css('display','inline-block');
 			return false;
@@ -81,9 +77,7 @@ $('.inputs').eq(0).focus();
 		else if(($(this).val() > 23) && ($('.times').index(this) == 0)){
 				i = $('.times').index(this) ; 
 				$(this).addClass("animated shake");
-				 setTimeout(function() {
-						   $('.times').removeClass("animated shake");
-					   },300);	
+				removeShaking($('.times'));					
 				$("#errmsg1").html("Enter Value less than 24 !!!").show().fadeOut(1000);
 				$('.times').eq(i).val("");$('.times').eq(this).focus();
 				
@@ -98,16 +92,17 @@ $('.inputs').eq(0).focus();
 		else if(($(this).val() > 60) && ($('.times').index(this) == 1 || 2)){
 				i = $('.times').index(this);
 				$(this).addClass("animated shake");
-				 setTimeout(function() {
-						   $('.times').removeClass("animated shake");
-					   },300);
+				removeShaking($('.times'));
 				$("#errmsg1").html("Enter Value less than 61 !!!").show().fadeOut(1000);
 				$('.times').eq(i).val("");$('.times').eq(this).focus();
-				
-
-
 		}
     });
+	
+	function removeShaking(value){
+		setTimeout(function() {
+			value.removeClass("animated shake");
+		},300);
+	}
 });
 </script>
 </head>
