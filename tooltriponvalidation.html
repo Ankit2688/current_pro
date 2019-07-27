@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head><style>
+
+
+
+.tool1 {
+    display:none;
+    width: 221px;
+    background-color: grey;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    margin-left: 7px;
+   margin-top: -35px;
+}
+
+.tool1::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: grey transparent transparent transparent;
+}
+
+input { width: 50px;height: 18px; margin: 5px;  border-radius:5px;border: 1px solid grey;}
+.times { width: 26px;height: 18px; margin: 5px;  border-radius:5px;border: 1px solid grey;padding: 0px 0px 0px 7px;
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  display: inline-block;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+//card entry
+$('.inputs').eq(0).focus();
+	
+	$('.inputs').keypress(function(e){
+		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
+			$(this).addClass("animated shake");
+			 removeShaking($('.inputs'));
+			$("#errmsg").html("Only Digits Allowed !!!").show().fadeOut(2000);
+			$("#errmsg").css('display','inline-block');
+			return false;
+		}	
+	});
+	$(".inputs").keyup(function(e){
+    	if(this.value.length == this.maxLength){
+        	$(this).next('.inputs').focus();
+        }
+    });	
+	
+//clock entry	
+	$('.times').keypress(function(e){
+		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
+			$(this).addClass("animated shake");
+			 removeShaking($('.inputs'));
+			$("#errmsg1").html("Only Digits Allowed !!!").show().fadeOut(1000);
+			$("#errmsg1").css('display','inline-block');
+			return false;
+		}	
+	});
+	var i = 0;
+	$(".times").keyup(function(){
+		
+		if(($(this).val() < 24) && ($('.times').index(this) == 0)){
+				if(this.value.length == this.maxLength){
+					$(this).next('.times').focus();
+				}
+		}
+		else if(($(this).val() > 23) && ($('.times').index(this) == 0)){
+				i = $('.times').index(this) ; 
+				$(this).addClass("animated shake");
+				removeShaking($('.times'));					
+				$("#errmsg1").html("Enter Value less than 24 !!!").show().fadeOut(1000);
+				$('.times').eq(i).val("");$('.times').eq(this).focus();
+				
+
+	
+		}
+		else if(($(this).val() < 61) && ($('.times').index(this) == 1 || 2 )){
+				if(this.value.length == this.maxLength){
+					$(this).next('.times').focus();
+				}
+		}		
+		else if(($(this).val() > 60) && ($('.times').index(this) == 1 || 2)){
+				i = $('.times').index(this);
+				$(this).addClass("animated shake");
+				removeShaking($('.times'));
+				$("#errmsg1").html("Enter Value less than 61 !!!").show().fadeOut(1000);
+				$('.times').eq(i).val("");$('.times').eq(this).focus();
+		}
+    });
+	
+	function removeShaking(value){
+		setTimeout(function() {
+			value.removeClass("animated shake");
+		},300);
+	}
+	
+	
+	//input field validation-----
+	
+		$('.inputfd').keypress(function(e){
+		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
+			$(this).addClass("animated shake");
+			 removeShaking($('.inputfd'));
+			$("#idFd").html("Only Digits Allowed !!!").show().fadeOut(2000);
+			$("#idFd").css('display','inline-block');
+			return false;
+		}	
+	});
+		$('.inputfd1').keypress(function(e){
+		if((e.which != 8 && e.which != 0 ) &&(e.which < 48 || e.which > 57)) {
+			$(this).addClass("animated shake");
+			 removeShaking($('.inputfd1'));
+			$("#idFd1").html("Only Digits Allowed !!!").show().fadeOut(2000);
+			$("#idFd1").css('display','inline-block');
+			return false;
+		}	
+	});
+	
+});
+</script>
+</head>
+<body>
+<h3>Card Entry</h3>
+<table>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>
+			<input class="inputs" type="text" maxlength="4" />
+			-<input class="inputs" type="text" maxlength="4" />
+			-<input class="inputs" type="text" maxlength="4" />
+			-<input class="inputs" type="text" maxlength="4" />
+		</th>
+	</tr>
+</table>
+<br><br>
+<span id="errmsg" style = "font-weight:bold;color:red;"></span>
+
+
+<h3>Clock Entry</h3>
+<table>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>
+			<input class="times" type="text" placeholder= "hh" maxlength="2" />
+			:<input class="times" type="text" placeholder= "mm" maxlength="2" />
+			:<input class="times" type="text" placeholder= "ss"  maxlength="2" />
+		</th>
+	</tr>
+</table>
+<br><br>
+<span id="errmsg1" style = "font-weight:bold;color:red;"></span>
+
+<br><br>
+<div class="row">
+	<div class = "col-sm-12">
+		<div class = "col-sm-6">
+			<div class="col-sm-6">
+				<label>Name :</label>
+			</div>
+			<div class="col-sm-6">
+			<span class="tool1" id = "idFd">Tooltip text</span>
+			<input class="form-control inputfd" type="text" />
+
+			</div>
+		</div>
+		<div class = "col-sm-6">
+			<div class="col-sm-6">
+				<label>User Name :</label>
+			</div>
+			<div class="col-sm-6">
+			<span class="tool1" id = "idFd1">Tooltip text</span>
+			<input class="form-control inputfd1" type="text" />
+			</div>
+		</div>
+	</div>
+
+	
+</div>
+
+
+
+</body>
+</html>
