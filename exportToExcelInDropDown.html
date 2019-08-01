@@ -1,0 +1,21 @@
+	$('#id1').DataTable({
+		displayLength: 25,
+        dom: 'Bfr<"top">p',
+		buttons: [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: ['excel','csv'],
+				filename: "myfile",
+				exportOptions:{
+					modifier :{
+						page:'all'
+					}
+				}
+            }
+        ],
+		oLanguage: {
+		sSearch: "Keyword Search"
+	 }
+
+		});
