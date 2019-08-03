@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
+  <title>Table</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
 .multiselect{
 	width:200px;
+	    border-radius: 5px;
 }
 .selectBox{
 	position:relative;
 }
 .selectBox select{
 	width:100%;	
+
+	
 }
 .overSelect{
 	position:absolute;
@@ -18,44 +27,180 @@
 	top:0;
 	bottom:0;
 }
-#checkboxes{
-	display:none;
+.checkboxes{
+	display:none;   
+
+	border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    background-color: antiquewhite;
 }
-#checkboxes label{
+.checkboxes label{
 	display:block;
+	    border: 1px solid lightseagreen;
+    border-radius: 5px;
+	    padding: 0px 0px 0px 12px;
+
 }
-#checkboxes label:hover{
-	background-color:yellow;
+.checkboxes label:hover{
+	background-color:#6f6f3e8a;
 }
-</style>
+  </style>
 </head>
 <body>
-	<div class="multiselect">
-		<div class="selectBox" onclick = "showCheckboxes()">
-			<select>
-				<option>Select vms..</option>
-			</select>
-			<div class="overSelect"></div>
-		</div>
-		<div id = "checkboxes">
-			<label for = "one"><input type = "checkbox" id = "one" />First one</label>
-			<label for = "two"><input type = "checkbox" id = "two" />Second one</label>
-			<label for = "three"><input type = "checkbox" id = "three" />Third one</label>
-		</div>
-	</div>
+
+<div class="container">            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+		<th>Select Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox" onClick = "$().showCB(1);">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "1one"><input type = "checkbox" id = "1one" />First one</label>
+					<label for = "1two"><input type = "checkbox" id = "1two" />Second one</label>
+					<label for = "1three"><input type = "checkbox" id = "1three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox" onClick = "$().showCB(2);">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "2one"><input type = "checkbox" id = "2one" />First one</label>
+					<label for = "2two"><input type = "checkbox" id = "2two" />Second one</label>
+					<label for = "2three"><input type = "checkbox" id = "2three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox" onClick = "$().showCB(3);">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "3one"><input type = "checkbox" id = "3one" />First one</label>
+					<label for = "3two"><input type = "checkbox" id = "3two" />Second one</label>
+					<label for = "3three"><input type = "checkbox" id = "3three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox" onClick = "$().showCB(4);">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "4one"><input type = "checkbox" id = "4one" />First one</label>
+					<label for = "4two"><input type = "checkbox" id = "4two" />Second one</label>
+					<label for = "4three"><input type = "checkbox" id = "4three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox" onClick = "$().showCB(5);">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "5one"><input type = "checkbox" id = "5one" />First one</label>
+					<label for = "5two"><input type = "checkbox" id = "5two" />Second one</label>
+					<label for = "5three"><input type = "checkbox" id = "5three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox" onClick = "$().showCB(6);">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "6one"><input type = "checkbox" id = "6one" />First one</label>
+					<label for = "6two"><input type = "checkbox" id = "6two" />Second one</label>
+					<label for = "6three"><input type = "checkbox" id = "6three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
 <script>
-	var expanded = false;
-	function showCheckboxes(){
-		var checkboxes = document.getElementById("checkboxes");
-		if(!expanded){
-			checkboxes.style.display = "block";
-			expanded = true;
+ $(document).ready(function() {
+
+	var count = 0 ; 
+	$.fn.showCB =function(index){
+		var data= parseInt(index);
+		if( count ==data){
+			$('.checkboxes').css('display','none');
+			count = 0;
 		}
 		else{
-			checkboxes.style.display = "none";
-			expanded = false;
+			$('.checkboxes').css('display','none');
+			$('.checkboxes').eq(index-1).css('display','block');
+			count = data;
 		}
 	}
+});
 </script>
-</body>
 </html>
