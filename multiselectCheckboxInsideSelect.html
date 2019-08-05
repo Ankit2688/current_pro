@@ -10,7 +10,7 @@
   <style>
 .multiselect{
 	width:200px;
-	    border-radius: 5px;
+	border-radius: 5px;
 }
 .selectBox{
 	position:relative;
@@ -29,7 +29,6 @@
 }
 .checkboxes{
 	display:none;   
-
 	border-radius: 5px;
     position: absolute;
     z-index: 1;
@@ -67,7 +66,7 @@
         <td>john@example.com</td>
 		<td style="position:absolute;">
 			<div class="multiselect">
-				<div class="selectBox" onClick = "$().showCB(1);">
+				<div class="selectBox">
 					<select>
 						<option>Select vms..</option>
 					</select>
@@ -87,7 +86,7 @@
         <td>mary@example.com</td>
 		<td style="position:absolute;">
 			<div class="multiselect">
-				<div class="selectBox" onClick = "$().showCB(2);">
+				<div class="selectBox">
 					<select>
 						<option>Select vms..</option>
 					</select>
@@ -107,89 +106,58 @@
         <td>july@example.com</td>
 		<td style="position:absolute;">
 			<div class="multiselect">
-				<div class="selectBox" onClick = "$().showCB(3);">
+				<div class="selectBox">
 					<select>
 						<option>Select vms..</option>
 					</select>
 					<div class="overSelect"></div>
 				</div>
 				<div id = "cb" class="checkboxes">
-					<label for = "3one"><input type = "checkbox" id = "3one" />First one</label>
-					<label for = "3two"><input type = "checkbox" id = "3two" />Second one</label>
-					<label for = "3three"><input type = "checkbox" id = "3three" />Third one</label>
+					<label for = "3one" class="cb"><input type = "checkbox" id = "3one" />First one</label>
+					<label for = "3two" class="cb"><input type = "checkbox" id = "3two" />Second one</label>
+					<label for = "3three" class="cb"><input type = "checkbox" id = "3three" />Third one</label>
 				</div>
 			</div>
 		</td>
       </tr>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-		<td style="position:absolute;">
-			<div class="multiselect">
-				<div class="selectBox" onClick = "$().showCB(4);">
-					<select>
-						<option>Select vms..</option>
-					</select>
-					<div class="overSelect"></div>
-				</div>
-				<div id = "cb" class="checkboxes">
-					<label for = "4one"><input type = "checkbox" id = "4one" />First one</label>
-					<label for = "4two"><input type = "checkbox" id = "4two" />Second one</label>
-					<label for = "4three"><input type = "checkbox" id = "4three" />Third one</label>
-				</div>
-			</div>
-		</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-		<td style="position:absolute;">
-			<div class="multiselect">
-				<div class="selectBox" onClick = "$().showCB(5);">
-					<select>
-						<option>Select vms..</option>
-					</select>
-					<div class="overSelect"></div>
-				</div>
-				<div id = "cb" class="checkboxes">
-					<label for = "5one"><input type = "checkbox" id = "5one" />First one</label>
-					<label for = "5two"><input type = "checkbox" id = "5two" />Second one</label>
-					<label for = "5three"><input type = "checkbox" id = "5three" />Third one</label>
-				</div>
-			</div>
-		</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-		<td style="position:absolute;">
-			<div class="multiselect">
-				<div class="selectBox" onClick = "$().showCB(6);">
-					<select>
-						<option>Select vms..</option>
-					</select>
-					<div class="overSelect"></div>
-				</div>
-				<div id = "cb" class="checkboxes">
-					<label for = "6one"><input type = "checkbox" id = "6one" />First one</label>
-					<label for = "6two"><input type = "checkbox" id = "6two" />Second one</label>
-					<label for = "6three"><input type = "checkbox" id = "6three" />Third one</label>
-				</div>
-			</div>
-		</td>
-      </tr>
+
+
     </tbody>
   </table>
 </div>
 </body>
 <script>
  $(document).ready(function() {
-
 	var count = 0 ; 
-	$.fn.showCB =function(index){
+	var index_value = 0;
+	$(".selectBox").click(function(event){
+		event.stopPropagation();
+
+		var index = $(".selectBox").index(this)+1;
+		index_value = index;
+		if( count == index){
+			$('.checkboxes').css('display','none');
+			count = 0;
+		}
+		else{
+			$('.checkboxes').css('display','none');
+			$('.checkboxes').eq(index-1).css('display','block');
+			count = index;
+		}		
+	});
+
+	$(window).click(function(e) {
+		var id = e.target.id; // gives the element's ID 
+		var cl = e.target.className; // gives the elements class(es)
+		if(id == ""){
+			$('.checkboxes').css('display','none');
+		}
+		else{
+			$('.checkboxes').eq(index_value-1).css('display','block');
+		}
+	});
+	/*
+	$.fn.showCB =function(index,event){
 		var data= parseInt(index);
 		if( count ==data){
 			$('.checkboxes').css('display','none');
@@ -201,6 +169,7 @@
 			count = data;
 		}
 	}
+	*/
 });
 </script>
 </html>
