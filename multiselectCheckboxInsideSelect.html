@@ -132,7 +132,6 @@
 	var index_value = 0;
 	$(".selectBox").click(function(event){
 		event.stopPropagation();
-
 		var index = $(".selectBox").index(this)+1;
 		index_value = index;
 		if( count == index){
@@ -151,9 +150,11 @@
 		var cl = e.target.className; // gives the elements class(es)
 		if(id == ""){
 			$('.checkboxes').css('display','none');
+			count= 0 ;
 		}
 		else{
 			$('.checkboxes').eq(index_value-1).css('display','block');
+			count = index_value;
 		}
 	});
 	/*
