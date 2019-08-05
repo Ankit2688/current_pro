@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Table</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+.multiselect{
+	width:200px;
+	border-radius: 5px;
+}
+.selectBox{
+	position:relative;
+}
+.selectBox select{
+	width:100%;	
+
+	
+}
+.overSelect{
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+}
+.checkboxes{
+	display:none;   
+	border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    background-color: antiquewhite;
+}
+.checkboxes label{
+	display:block;
+	    border: 1px solid lightseagreen;
+    border-radius: 5px;
+	    padding: 0px 0px 0px 12px;
+
+}
+.checkboxes label:hover{
+	background-color:#6f6f3e8a;
+}
+  </style>
+</head>
+<body>
+
+<div class="container">            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+		<th>Select Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "1one"><input type = "checkbox" id = "1one" />First one</label>
+					<label for = "1two"><input type = "checkbox" id = "1two" />Second one</label>
+					<label for = "1three"><input type = "checkbox" id = "1three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "2one"><input type = "checkbox" id = "2one" />First one</label>
+					<label for = "2two"><input type = "checkbox" id = "2two" />Second one</label>
+					<label for = "2three"><input type = "checkbox" id = "2three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+		<td style="position:absolute;">
+			<div class="multiselect">
+				<div class="selectBox">
+					<select>
+						<option>Select vms..</option>
+					</select>
+					<div class="overSelect"></div>
+				</div>
+				<div id = "cb" class="checkboxes">
+					<label for = "3one" class="cb"><input type = "checkbox" id = "3one" />First one</label>
+					<label for = "3two" class="cb"><input type = "checkbox" id = "3two" />Second one</label>
+					<label for = "3three" class="cb"><input type = "checkbox" id = "3three" />Third one</label>
+				</div>
+			</div>
+		</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+</div>
+</body>
+<script>
+ $(document).ready(function() {
+	var count = 0 ; 
+	var index_value = 0;
+	$(".selectBox").click(function(event){
+		event.stopPropagation();
+		var index = $(".selectBox").index(this)+1;
+		index_value = index;
+		if( count == index){
+			$('.checkboxes').css('display','none');
+			count = 0;
+		}
+		else{
+			$('.checkboxes').css('display','none');
+			$('.checkboxes').eq(index-1).css('display','block');
+			count = index;
+		}		
+	});
+
+	$(window).click(function(e) {
+		var id = e.target.id; // gives the element's ID 
+		var cl = e.target.className; // gives the elements class(es)
+		if(id == ""){
+			$('.checkboxes').css('display','none');
+			count= 0 ;
+		}
+		else{
+			$('.checkboxes').eq(index_value-1).css('display','block');
+			count = index_value;
+		}
+	});
+	/*
+	$.fn.showCB =function(index,event){
+		var data= parseInt(index);
+		if( count ==data){
+			$('.checkboxes').css('display','none');
+			count = 0;
+		}
+		else{
+			$('.checkboxes').css('display','none');
+			$('.checkboxes').eq(index-1).css('display','block');
+			count = data;
+		}
+	}
+	*/
+});
+</script>
+</html>
