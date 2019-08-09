@@ -4,3 +4,9 @@
 		var index = $(".selectBox").index(this);
 	});
   
+//how to get index of current row in table 
+
+$('td').change(function(){
+var data = $(this).parent().index();
+//var data = $(this).parent().parent().index();
+});
