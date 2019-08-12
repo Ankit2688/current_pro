@@ -10,3 +10,24 @@ $('td').change(function(){
 var data = $(this).parent().index();
 //var data = $(this).parent().parent().index();
 });
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+/// how to unselect all the option for a dropdown with a table along with multiple checkboxes---
+
+
+row_index = $(this).parent().parent().index();
+			var did = row_index + 1;
+			var current_div_id  =("ms-list"+ "-"+did);		
+
+//uncheck all checked items---
+	$( '#'+ current_div_id +" "+ 'input:checked').each(function() {
+		$(this).prop('checked',false);
+	});					
+//unselect all selected options---
+	$( '.'+ current_div_id +" "+ 'option:selected').each(function() {
+		$(this).prop('selected', false);
+	});
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
