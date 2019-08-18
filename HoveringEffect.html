@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hovering Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  .fr{
+    border: 1px solid grey;
+    width: 80px;
+    padding: 3px 0px 0px 0px;
+    margin: 10px 0px 0px 10px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;	
+  }
+  .sr{
+    border: 1px solid grey;
+    width: 200px;
+    padding: 36px 0px 0px 0px;
+    margin: 10px 0px 0px 10px;
+    height: 100px;
+    border-radius: 5px;
+    text-align: center;
+	font-weight:bold;
+  }
+  .bl-cls{
+	background-color:red;
+  }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid" style = "margin-bottom:30px;">
+  <div class="row">
+	<div class="col-sm-12">
+		<div class="col-sm-2 fr" style="background-color:lavender;">A</div>
+		<div class="col-sm-2 fr" style="background-color:lavenderblush;">B</div>
+		<div class="col-sm-2 fr" style="background-color:lavender;">C</div>
+		<div class="col-sm-2 fr" style="background-color:lavenderblush;">D</div>
+		<div class="col-sm-2 fr" style="background-color:lavender;">E</div>
+		<div class="col-sm-2 fr" style="background-color:lavenderblush;">F</div>
+		<div class="col-sm-2 fr" style="background-color:lavender;">G</div>
+		<div class="col-sm-2 fr" style="background-color:lavenderblush;">H</div>
+		<div class="col-sm-2 fr" style="background-color:lavender;">I</div>
+		<div class="col-sm-2 fr" style="background-color:lavenderblush;">J</div>
+		<div class="col-sm-2 fr" style="background-color:lavender;">K</div>
+		<div class="col-sm-2 fr" style="background-color:lavenderblush;">L</div>
+	</div>
+  </div>
+</div>
+<div style = "margin:0px auto;width:700px;">
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-sm-12">
+		<div class="col-sm-3 sr" style="background-color:lavender;">A</div>
+		<div class="col-sm-3 sr" style="background-color:lavenderblush;">B</div>
+		<div class="col-sm-3 sr" style="background-color:lavender;">C</div>
+	  </div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-sm-12">
+		<div class="col-sm-3 sr" style="background-color:lavender;">D</div>
+		<div class="col-sm-3 sr" style="background-color:lavenderblush;">E</div>
+		<div class="col-sm-3 sr" style="background-color:lavender;">F</div>
+	  </div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-sm-12">
+		<div class="col-sm-3 sr" style="background-color:lavender;">G</div>
+		<div class="col-sm-3 sr" style="background-color:lavenderblush;">H</div>
+		<div class="col-sm-3 sr" style="background-color:lavender;">I</div>
+	  </div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-sm-12">
+		<div class="col-sm-3 sr" style="background-color:lavender;">J</div>
+		<div class="col-sm-3 sr" style="background-color:lavenderblush;">K</div>
+		<div class="col-sm-3 sr" style="background-color:lavender;">L</div>
+	  </div>
+	</div>
+</div> 
+</div> 
+</body>
+
+<script>
+
+$(function(){
+	$('body').css('background-color','grey');
+	var current_index = 0;
+	var div_color ="#ffffff";
+	
+	//hovering feature added to top buttons---------
+	$('.fr').hover(function(){
+		current_index = $('.fr').index(this);
+		div_color = $('.sr').eq(current_index).css('background-color');
+		$('.sr').eq(current_index).css('background-color','#c1416c');
+	},function(){
+		$('.sr').eq(current_index).css('background-color',div_color);
+	});
+	
+});
+
+</script>
+</html>
