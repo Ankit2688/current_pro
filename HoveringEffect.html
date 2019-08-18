@@ -10,13 +10,15 @@
   <style>
   .fr{
     border: 1px solid grey;
-    width: 80px;
+    width: 40px;
     padding: 3px 0px 0px 0px;
     margin: 10px 0px 0px 10px;
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
     text-align: center;	
+	background-color: white;
+	color:black;
   }
   .sr{
     border: 1px solid grey;
@@ -27,6 +29,7 @@
     border-radius: 5px;
     text-align: center;
 	font-weight:bold;
+	cursor:pointer;
   }
   .bl-cls{
 	background-color:red;
@@ -37,78 +40,80 @@
 
 <div class="container-fluid" style = "margin-bottom:30px;">
   <div class="row">
-	<div class="col-sm-12">
-		<div class="col-sm-2 fr" style="background-color:lavender;">A</div>
-		<div class="col-sm-2 fr" style="background-color:lavenderblush;">B</div>
-		<div class="col-sm-2 fr" style="background-color:lavender;">C</div>
-		<div class="col-sm-2 fr" style="background-color:lavenderblush;">D</div>
-		<div class="col-sm-2 fr" style="background-color:lavender;">E</div>
-		<div class="col-sm-2 fr" style="background-color:lavenderblush;">F</div>
-		<div class="col-sm-2 fr" style="background-color:lavender;">G</div>
-		<div class="col-sm-2 fr" style="background-color:lavenderblush;">H</div>
-		<div class="col-sm-2 fr" style="background-color:lavender;">I</div>
-		<div class="col-sm-2 fr" style="background-color:lavenderblush;">J</div>
-		<div class="col-sm-2 fr" style="background-color:lavender;">K</div>
-		<div class="col-sm-2 fr" style="background-color:lavenderblush;">L</div>
+	<div class="col-sm-12 buttons">
+	<!-- dynamically added alpahbet divs -->
 	</div>
   </div>
 </div>
-<div style = "margin:0px auto;width:700px;">
+<div style = "margin:0px auto;width:1100px;">
 <div class="container-fluid">
 	<div class="row">
-	  <div class="col-sm-12">
-		<div class="col-sm-3 sr" style="background-color:lavender;">A</div>
-		<div class="col-sm-3 sr" style="background-color:lavenderblush;">B</div>
-		<div class="col-sm-3 sr" style="background-color:lavender;">C</div>
-	  </div>
-	</div>
-</div>
-<div class="container-fluid">
-	<div class="row">
-	  <div class="col-sm-12">
-		<div class="col-sm-3 sr" style="background-color:lavender;">D</div>
-		<div class="col-sm-3 sr" style="background-color:lavenderblush;">E</div>
-		<div class="col-sm-3 sr" style="background-color:lavender;">F</div>
-	  </div>
-	</div>
-</div>
-<div class="container-fluid">
-	<div class="row">
-	  <div class="col-sm-12">
-		<div class="col-sm-3 sr" style="background-color:lavender;">G</div>
-		<div class="col-sm-3 sr" style="background-color:lavenderblush;">H</div>
-		<div class="col-sm-3 sr" style="background-color:lavender;">I</div>
-	  </div>
-	</div>
-</div>
-<div class="container-fluid">
-	<div class="row">
-	  <div class="col-sm-12">
-		<div class="col-sm-3 sr" style="background-color:lavender;">J</div>
-		<div class="col-sm-3 sr" style="background-color:lavenderblush;">K</div>
-		<div class="col-sm-3 sr" style="background-color:lavender;">L</div>
+	  <div class="col-sm-12 alpBlock">
+	  <!-- dynamically created alpahbet blocks -->
 	  </div>
 	</div>
 </div> 
 </div> 
 </body>
-
 <script>
 
 $(function(){
 	$('body').css('background-color','grey');
-	var current_index = 0;
-	var div_color ="#ffffff";
 	
+	//dynamically creating alphabet divs ----
+	var arrayCount = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+		for(var i=0;i<arrayCount.length;i++){
+			var $firstdt = $("<div>").attr({"class" : "col-sm-2 fr"});
+			if(i%2 ==0){
+				$firstdt.css('background-color',"lavender");
+			}
+			else{
+				$firstdt.css('background-color',"lavenderblush");
+			}
+			$firstdt.text(arrayCount[i]);
+			$(".buttons").append($firstdt);
+		}
+		
+	//dynamically creating alphabet discription block ----
+	var arrayBlock = ["A for Apple","B for Ball","C for Cat","D for Dog","E for Eye","F for Fish","G for Goat",
+					  "H for Hourse","I for Ink","J for Jocker","K for Kite","L for Lion","M for Man","N for Nose",
+					  "O for Owl","P for Pen","Q for Queen","R for Rat","S for Ship","T for Tiger","U for Union",
+					  "V for Victory","W for Window","X for Xmas","Y for Yack"]
+	for(var i=0;i<arrayBlock.length;i++){
+			var $seconddt = $("<div>").attr({"class" : "col-sm-2 sr"});
+			if(i%2 ==0){
+				$seconddt.css('background-color',"lavender");
+			}
+			else{
+				$seconddt.css('background-color',"lavenderblush");
+			}
+			$seconddt.text(arrayBlock[i]);
+			$(".alpBlock").append($seconddt);
+		}
+	
+	var first_index = 0,sec_index = 0;
+	var div_color ="#ffffff";	
 	//hovering feature added to top buttons---------
 	$('.fr').hover(function(){
-		current_index = $('.fr').index(this);
-		div_color = $('.sr').eq(current_index).css('background-color');
-		$('.sr').eq(current_index).css('background-color','#c1416c');
+		first_index = $('.fr').index(this);
+		div_color = $('.sr').eq(first_index).css('background-color');
+		$('.fr').eq(first_index).css('background-color','#c1416c');
+		$('.sr').eq(first_index).css('background-color','#c1416c');
 	},function(){
-		$('.sr').eq(current_index).css('background-color',div_color);
+		$('.fr').eq(first_index).css('background-color',div_color);
+		$('.sr').eq(first_index).css('background-color',div_color);
 	});
 	
+	//hovering feature added to bottom buttons---------
+	$('.sr').hover(function(){
+		sec_index = $('.sr').index(this);
+		div_color = $('.fr').eq(sec_index).css('background-color');
+		$('.sr').eq(sec_index).css('background-color','#c1416c');
+		$('.fr').eq(sec_index).css('background-color','#c1416c');
+	},function(){
+		$('.sr').eq(sec_index).css('background-color',div_color);
+		$('.fr').eq(sec_index).css('background-color',div_color);
+	});
 });
 
 </script>
