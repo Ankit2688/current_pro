@@ -29,5 +29,9 @@ row_index = $(this).parent().parent().index();
 		$(this).prop('selected', false);
 	});
 ----------------------------------------------------------------------------------------------------------------------------------------
-
-
+	//disable copy/paste ---
+	
+	$('#enterCap').bind("cut copy paste",function(e) {
+          e.preventDefault();
+		  $("#hide").css("display","block").fadeOut(2000);
+      });
