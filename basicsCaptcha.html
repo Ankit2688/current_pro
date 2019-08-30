@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<head>
+<script type='text/javascript'>
+
+
+$("#gen").on("click",function(){
+	stringGen(5);
+});
+function stringGen(len)
+{
+    var text = " ";
+    var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    for( var i=0; i < len; i++ )
+        text += charset.charAt(Math.floor(Math.random() * charset.length));
+}
+document.writeln(stringGen(5));
+document.writeln('<br/><br/><br/><br/><br/>');
+document.writeln(stringGen(4));
+document.writeln('<br/><br/><br/><br/><br/>');
+document.writeln(stringGen(6));
+document.writeln('<br/><br/><br/><br/><br/>');
+document.writeln(stringGen(3));
+
+</script>
+</head>
+<button id = "gen">Generate</button>
+<body>
+</body>
+</html>
